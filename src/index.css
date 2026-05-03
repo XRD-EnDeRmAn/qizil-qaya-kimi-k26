@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 150 50% 5%;
+    --foreground: 40 30% 94%;
+    --card: 150 40% 8%;
+    --card-foreground: 40 30% 94%;
+    --popover: 150 40% 8%;
+    --popover-foreground: 40 30% 94%;
+    --primary: 45 70% 52%;
+    --primary-foreground: 150 50% 5%;
+    --secondary: 150 30% 12%;
+    --secondary-foreground: 40 30% 94%;
+    --muted: 150 30% 12%;
+    --muted-foreground: 40 25% 68%;
+    --accent: 150 30% 12%;
+    --accent-foreground: 40 30% 94%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 150 30% 25%;
+    --input: 150 30% 25%;
+    --ring: 45 70% 52%;
+    --radius: 0.5rem;
+  }
+
+  body {
+    @apply bg-[#0A1F15] text-[#F5F0E8];
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', serif;
+  }
+}
+
+@layer components {
+  .font-display {
+    font-family: 'Playfair Display', serif;
+  }
+
+  .font-heading {
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .font-body {
+    font-family: 'Montserrat', sans-serif;
+  }
+}
+
+/* Kinetic Typography */
+.kinetic-title {
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+}
+
+.kinetic-title .char {
+  display: inline-block;
+  transform-style: preserve-3d;
+  will-change: transform, filter, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(-1200px) rotateY(45deg) rotateX(-30deg) scale(2.5);
+  filter: blur(4px);
+  opacity: 0;
+  transition: transform 1.2s cubic-bezier(0.215, 0.610, 0.355, 1),
+              filter 1.2s cubic-bezier(0.215, 0.610, 0.355, 1),
+              opacity 1.2s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+
+.kinetic-title .char.revealed {
+  transform: translateZ(0) rotateY(0) rotateX(0) scale(1);
+  filter: blur(0px);
+  opacity: 1;
+}
+
+/* Light Beams */
+.light-beams {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.beam {
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  width: 200vw;
+  height: 200vw;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  mix-blend-mode: screen;
+}
+
+.beam-1 {
+  background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.08) 0%, transparent 60%);
+  animation: rotateBeam1 12s linear infinite;
+}
+
+.beam-2 {
+  background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+  animation: rotateBeam2 16s linear infinite;
+}
+
+.beam-3 {
+  background: radial-gradient(ellipse at center, rgba(200, 184, 150, 0.06) 0%, transparent 55%);
+  animation: rotateBeam3 20s linear infinite;
+}
+
+@keyframes rotateBeam1 {
+  0% { transform: translateX(-50%) rotate(0deg); }
+  100% { transform: translateX(-50%) rotate(360deg); }
+}
+
+@keyframes rotateBeam2 {
+  0% { transform: translateX(-50%) rotate(120deg); }
+  100% { transform: translateX(-50%) rotate(480deg); }
+}
+
+@keyframes rotateBeam3 {
+  0% { transform: translateX(-50%) rotate(240deg); }
+  100% { transform: translateX(-50%) rotate(600deg); }
+}
+
+/* Scroll Indicator */
+.scroll-indicator-line {
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(12px); }
+}
+
+/* Custom Cursor */
+.custom-cursor {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: #D4AF37;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease, width 0.15s ease, height 0.15s ease;
+  transform: translate(-50%, -50%);
+}
+
+.custom-cursor.hover {
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid #D4AF37;
+}
+
+/* Mobile Menu */
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: #0A1F15;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+/* SVG Border Animation */
+.svg-border-path {
+  fill: none;
+  stroke: #2D5A45;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Smooth scroll */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
